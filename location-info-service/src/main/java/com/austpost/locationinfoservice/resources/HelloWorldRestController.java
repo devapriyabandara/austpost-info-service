@@ -1,4 +1,4 @@
-package com.austpost.locationinfoservice.com.austpost.locationinfoservice;
+package com.austpost.locationinfoservice.resources;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

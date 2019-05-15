@@ -14,6 +14,7 @@ JDK 1.8.0
 Maven 3.6.1
 IntelliJ IDEA CE 2019
 Putty / SSH client
+Github access
 
 ### My local workspaces
 
