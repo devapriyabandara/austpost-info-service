@@ -1,4 +1,4 @@
-#Australia Post Location Service
+# Australia Post Location Service
 
 This project facilitate 3 springboot REST apis to inquire suburb by passing post code, post code by passing suburb 
 and secure api to add suburb and post code combination
