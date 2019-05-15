@@ -10,9 +10,11 @@ public class LocationInformation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    private String suburbName;
     private int postalCode;
+    private String suburbName;
+
 
     public LocationInformation() {
     }
