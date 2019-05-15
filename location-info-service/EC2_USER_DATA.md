@@ -16,17 +16,17 @@ mkdir /opt/spring-boot-ec2-demo
 echo "RUN_ARGS=--spring.profiles.active=ec2" > /opt/spring-boot-ec2-demo/spring-boot-ec2-demo.conf
 
 # download the maven artifact from S3
-aws s3 cp s3://springbootprojects/aws-spring-boot-demo-0.0.1-SNAPSHOT.jar /opt/spring-boot-ec2-demo/ --region=ap-south-1
+aws s3 cp s3://ausipostspringbootprojects/location-info-service-0.0.1-SNAPSHOT.jar /opt/spring-boot-ec2-demo/ --region=ap-southeast-2
 
 # create a springboot user to run the app as a service
 useradd springboot
 # springboot login shell disabled
 chsh -s /sbin/nologin springboot
-chown springboot:springboot /opt/spring-boot-ec2-demo/aws-spring-boot-demo-0.0.1-SNAPSHOT.jar
-chmod 500 /opt/spring-boot-ec2-demo/aws-spring-boot-demo-0.0.1-SNAPSHOT.jar
+chown springboot:springboot /opt/spring-boot-ec2-demo/location-info-service-0.0.1-SNAPSHOT.jar
+chmod 500 /opt/spring-boot-ec2-demo/location-info-service-0.0.1-SNAPSHOT.jar
 
 # create a symbolic link
-ln -s /opt/spring-boot-ec2-demo/aws-spring-boot-demo-0.0.1-SNAPSHOT.jar /etc/init.d/spring-boot-ec2-demo
+ln -s /opt/spring-boot-ec2-demo/location-info-service-0.0.1-SNAPSHOT.jar /etc/init.d/spring-boot-ec2-demo
 
 # forward port 80 to 8080
 echo "<VirtualHost *:80>
