@@ -1,3 +1,6 @@
+/*
+    Entity class to location information (suburb name and post code)
+*/
 package com.austpost.locationinfoservice.models;
 
 import javax.persistence.*;
@@ -6,21 +9,24 @@ import javax.persistence.*;
 @Table(name="location_information")
 public class LocationInformation {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Integer postalCode;
-    private String suburbName;
+    private Integer postCode;   // Holds post code data
+    private String suburbName;  // Holds suburb name
 
 
     public LocationInformation() {
     }
 
-    public LocationInformation(Integer postalCode, String suburbName) {
+    public LocationInformation(Integer postCode, String suburbName) {
         this.suburbName = suburbName;
-        this.postalCode = postalCode;
+        this.postCode = postCode;
     }
+
+    public Integer getId() { return id; }
 
     public String getSuburbName() {
         return suburbName;
@@ -30,11 +36,11 @@ public class LocationInformation {
         this.suburbName = suburbName;
     }
 
-    public Integer getPostalCode() {
-        return postalCode;
+    public Integer getPostCode() {
+        return postCode;
     }
 
-    public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
+    public void setPostCode(Integer postCode) {
+        this.postCode = postCode;
     }
 }

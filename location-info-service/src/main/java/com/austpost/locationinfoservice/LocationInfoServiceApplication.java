@@ -1,3 +1,7 @@
+/*
+	This class is the main entry point and which initialize spring boot auto configurations
+	and execute location information application
+ */
 package com.austpost.locationinfoservice;
 
 import org.springframework.boot.SpringApplication;
