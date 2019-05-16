@@ -10,11 +10,13 @@ See deployment for notes on how to deploy the project on a live system.]
 
 ### Prerequists
 
+```
 JDK 1.8.0
 Maven 3.6.1
 IntelliJ IDEA CE 2019
 Putty / SSH client
 Github access
+```
 
 ### My local workspaces
 

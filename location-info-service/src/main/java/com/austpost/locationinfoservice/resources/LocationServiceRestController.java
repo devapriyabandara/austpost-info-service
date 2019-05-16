@@ -51,7 +51,7 @@ public class LocationServiceRestController {
         This method implements the /getsuburb API and returns the location information object as a JSON object with
         suburb name and post code details
      */
-    @RequestMapping(path="/getsuburb/{postCode}", consumes = "application/json", produces = "application/json")
+    @RequestMapping(path="/getsuburb/{postCode}", produces = "application/json")
     public @ResponseBody List<LocationInformation> getSuburbByPostcode(@PathVariable("postCode") Integer postCode){
 
         System.out.println("PostCode :"+postCode);
@@ -63,7 +63,7 @@ public class LocationServiceRestController {
         This method implements the /getpostcode API and returns the location information object as a JSON object with
         post code and suburb name details
      */
-    @RequestMapping(path="/getpostcode/{suburbName}", consumes = "application/json", produces = "application/json")
+    @RequestMapping(path="/getpostcode/{suburbName}", produces = "application/json")
     public @ResponseBody List<LocationInformation> findPostcodeBySuburb(@PathVariable("suburbName") String suburbName){
 
         System.out.println("Suburb Name :"+suburbName);
