@@ -145,6 +145,10 @@ access swagger api documentation.
 
 ```
 http://localhost:8085/swagger-ui.html
+or
+http://ec2-13-55-199-102.ap-southeast-2.compute.amazonaws.com:8085/swagger-ui.html
+        username : administrator
+        password : administrator
 ```
 
 ### References
