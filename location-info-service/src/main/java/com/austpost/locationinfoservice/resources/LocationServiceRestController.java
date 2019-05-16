@@ -5,11 +5,12 @@ This is the class responsible for main rest apis
 package com.austpost.locationinfoservice.resources;
 
 import com.austpost.locationinfoservice.models.LocationInformation;
-import com.austpost.locationinfoservice.models.LocationInformationRepository;
+import com.austpost.locationinfoservice.service.LocationInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -17,16 +18,16 @@ import java.util.List;
 public class LocationServiceRestController {
 
     @Autowired
-    private LocationInformationRepository locationInformationRepository;
+    private LocationInformationService locationInformationService;
 
-    @GetMapping(path="/add")
+    @PostMapping(path="/add")
     public @ResponseBody String addNewLocationInformation(@RequestParam int postCode, @RequestParam String suburbName){
 
         LocationInformation newLocationInfo = new LocationInformation();
         newLocationInfo.setPostalCode(postCode);
         newLocationInfo.setSuburbName(suburbName);
 
-        locationInformationRepository.save(newLocationInfo);
+        locationInformationService.save(newLocationInfo);
 
         return "Saved";
     }
@@ -34,16 +35,22 @@ public class LocationServiceRestController {
     @GetMapping(path="/all")
     public @ResponseBody Iterable<LocationInformation> getAllLocations(){
 
-        return locationInformationRepository.findAll();
-
-//        return Arrays.asList(
-//            new LocationInformation(3806, "Berwick"),
-//            new LocationInformation(3806, "Harkway"),
-//            new LocationInformation(3977, "Cranbourne North")
-//        );
+        return locationInformationService.findAll();
     }
 
 
+    @RequestMapping(path="/getsuburb/{postCode}")
+    public @ResponseBody List<LocationInformation> getSuburbByPostcode(@PathVariable("postCode") Integer postCode){
 
+        System.out.println("PostCode :"+postCode);
+        return locationInformationService.findSuburbByPostcode(postCode);
+    }
+
+    @RequestMapping(path="/getpostcode/{suburbName}")
+    public @ResponseBody List<LocationInformation> findPostcodeBySuburb(@PathVariable("suburbName") String suburbName){
+
+        System.out.println("Suburb Name :"+suburbName);
+        return locationInformationService.findPostcodeBySuburb(suburbName);
+    }
 
 }

@@ -1,25 +1,23 @@
 package com.austpost.locationinfoservice.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="location_information")
 public class LocationInformation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private int postalCode;
+    private Integer postalCode;
     private String suburbName;
 
 
     public LocationInformation() {
     }
 
-    public LocationInformation(int postalCode, String suburbName) {
+    public LocationInformation(Integer postalCode, String suburbName) {
         this.suburbName = suburbName;
         this.postalCode = postalCode;
     }
@@ -32,11 +30,11 @@ public class LocationInformation {
         this.suburbName = suburbName;
     }
 
-    public int getPostalCode() {
+    public Integer getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
     }
 }

@@ -59,6 +59,12 @@ Use following steps create AWS EC2 instance, S3 bucket, IAM role, policy and Sec
 8. Attach previously created Security Group <ausipostapipublicaccess> to this EC2 instance
 9. Generate a key pair with name <ausipostspringbootprojects> and download it to local pc <ausipostspringbootprojects.pem>.
 10. Review and complete EC2 instance creation.
+11. AWS RDS MySQL DB instance create to host the sample data base <locationdb>
+    ex : url=jdbc:mysql://mydbinstance.ce9thc9invqv.ap-southeast-2.rds.amazonaws.com:3306/locationsdb
+         user=root
+         password=mydbinstance
+12. Open up the security groups and change the inbound traffic to allow all traffic for RDS instance
+
 ```
 
 ### Deployment
