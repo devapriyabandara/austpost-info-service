@@ -21,6 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         httpSecurity
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/swagger*/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/locationservice/all").permitAll() // permit all the request to /all API without any authentication
                 .antMatchers(HttpMethod.GET,"/locationservice/getsuburb/**").permitAll() // permit all the request to /getsuburb API without any authentication
                 .antMatchers(HttpMethod.GET,"/locationservice/getpostcode/**").permitAll()  // permit all the request to /getpostcode API without any authentication

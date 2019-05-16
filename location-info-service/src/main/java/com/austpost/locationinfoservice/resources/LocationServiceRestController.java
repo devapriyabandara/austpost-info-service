@@ -38,20 +38,10 @@ public class LocationServiceRestController {
     }
 
     /*
-        This method implements the /all API to list all the available location information as a list
-     */
-    @GetMapping(path="/all", produces = "application/json")
-    public @ResponseBody Iterable<LocationInformation> getAllLocations(){
-
-        return locationInformationService.findAll();
-    }
-
-
-    /*
         This method implements the /getsuburb API and returns the location information object as a JSON object with
         suburb name and post code details
      */
-    @RequestMapping(path="/getsuburb/{postCode}", produces = "application/json")
+    @GetMapping(path="/getsuburb/{postCode}", produces = "application/json")
     public @ResponseBody List<LocationInformation> getSuburbByPostcode(@PathVariable("postCode") Integer postCode){
 
         System.out.println("PostCode :"+postCode);
@@ -63,11 +53,23 @@ public class LocationServiceRestController {
         This method implements the /getpostcode API and returns the location information object as a JSON object with
         post code and suburb name details
      */
-    @RequestMapping(path="/getpostcode/{suburbName}", produces = "application/json")
+    @GetMapping(path="/getpostcode/{suburbName}", produces = "application/json")
     public @ResponseBody List<LocationInformation> findPostcodeBySuburb(@PathVariable("suburbName") String suburbName){
 
         System.out.println("Suburb Name :"+suburbName);
         return locationInformationService.findPostcodeBySuburb(suburbName);
     }
+
+
+
+
+//    /*
+//        This method implements the /all API to list all the available location information as a list
+//     */
+//    @GetMapping(path="/all", produces = "application/json")
+//    public @ResponseBody Iterable<LocationInformation> getAllLocations(){
+//
+//        return locationInformationService.findAll();
+//    }
 
 }
