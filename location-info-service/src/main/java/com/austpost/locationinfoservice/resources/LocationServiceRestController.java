@@ -7,6 +7,7 @@
 
 package com.austpost.locationinfoservice.resources;
 
+import com.austpost.locationinfoservice.exceptions.LocationServiceException;
 import com.austpost.locationinfoservice.models.LocationInformation;
 import com.austpost.locationinfoservice.service.LocationInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,21 @@ public class LocationServiceRestController {
         This method implements the /add API and captures location information as a JSON object
      */
     @PostMapping(path="/add" , consumes = "application/json", produces = "application/json")
-    public @ResponseBody LocationInformation addNewLocationInformation(@RequestBody LocationInformation locationInformation ){
+    public @ResponseBody LocationInformation addNewLocationInformation(@RequestBody LocationInformation locationInformation )
+    throws LocationServiceException {
 
         // Setting up the location information object to pass into save
         LocationInformation locationInformationResponse = new LocationInformation();
         locationInformationResponse.setPostCode(locationInformation.getPostCode());
         locationInformationResponse.setSuburbName(locationInformation.getSuburbName());
 
-        locationInformationService.save(locationInformationResponse);
+        if (locationInformationService.isRecordExist(locationInformation)){
+            throw new LocationServiceException("Postcode "+locationInformation.getPostCode()+" and Suburb "+
+                    locationInformation.getSuburbName()+" combination exists in the system !");
+
+        } else {
+            locationInformationService.save(locationInformationResponse);
+        }
 
         return locationInformationResponse;
     }
@@ -42,10 +50,17 @@ public class LocationServiceRestController {
         suburb name and post code details
      */
     @GetMapping(path="/getsuburb/{postCode}", produces = "application/json")
-    public @ResponseBody List<LocationInformation> getSuburbByPostcode(@PathVariable("postCode") Integer postCode){
+    public @ResponseBody List<LocationInformation> getSuburbByPostcode(@PathVariable("postCode") Integer postCode)
+    throws LocationServiceException {
 
         System.out.println("PostCode :"+postCode);
-        return locationInformationService.findSuburbByPostcode(postCode);
+        List<LocationInformation> locationInformations = locationInformationService.findSuburbByPostcode(postCode);
+
+        if (locationInformations == null || locationInformations.size() == 0){
+            throw new LocationServiceException("Suburb not found for postcode "+postCode);
+        }
+
+        return locationInformations;
     }
 
 
@@ -54,10 +69,17 @@ public class LocationServiceRestController {
         post code and suburb name details
      */
     @GetMapping(path="/getpostcode/{suburbName}", produces = "application/json")
-    public @ResponseBody List<LocationInformation> findPostcodeBySuburb(@PathVariable("suburbName") String suburbName){
+    public @ResponseBody List<LocationInformation> findPostcodeBySuburb(@PathVariable("suburbName") String suburbName)
+    throws LocationServiceException{
 
         System.out.println("Suburb Name :"+suburbName);
-        return locationInformationService.findPostcodeBySuburb(suburbName);
+        List<LocationInformation> locationInformations = locationInformationService.findPostcodeBySuburb(suburbName);
+
+        if (locationInformations == null || locationInformations.size() == 0){
+            throw new LocationServiceException("Postcode not found for suburb "+suburbName);
+        }
+
+        return locationInformations;
     }
 
 

@@ -23,4 +23,11 @@ public interface LocationServiceDao extends CrudRepository<LocationInformation, 
      */
     @Query(value="SELECT *FROM location_information WHERE suburb_name=?1", nativeQuery=true)
     List<LocationInformation> findPostcodeBySuburb(String suburbName);
+
+    /*
+        Custom method declaration to find postcode and suburb combination existence
+        by passing suburb name and postcode
+     */
+    @Query(value="SELECT *FROM location_information WHERE suburb_name=?1 AND post_code=?2", nativeQuery=true)
+    List<LocationInformation> isRecordExist(String suburbName, int postCode);
 }

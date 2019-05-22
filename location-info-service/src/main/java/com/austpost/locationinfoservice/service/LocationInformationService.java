@@ -43,4 +43,20 @@ public class LocationInformationService {
     public List<LocationInformation> findPostcodeBySuburb(String suburbName){
         return locationServiceDao.findPostcodeBySuburb(suburbName);
     }
+
+    /*
+        Implementation of isRecordExist method in LocationServiceDao
+        This method will check record existence in database by passing suburb, postcode combination
+     */
+    public boolean isRecordExist(LocationInformation locationInformation){
+
+        List<LocationInformation> locationInformations = locationServiceDao.isRecordExist(
+                locationInformation.getSuburbName(), locationInformation.getPostCode());
+
+        if (locationInformations == null || locationInformations.size() == 0){
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
